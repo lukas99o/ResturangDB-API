@@ -42,6 +42,20 @@ namespace ResturangDB_API.Controllers
             return Ok(menu);
         }
 
+        [HttpGet]
+        [Route("GetItemsFromMenu")]
+        public async Task<ActionResult<MenuDTO>> GetItemsFromMenu(int menuID)
+        {
+            var menu = await _menuService.GetMenuByIdAsync(menuID);
+
+            if (menu == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(menu);
+        }
+
         [HttpPut]
         [Route("UpdateMenu")]
         public async Task<ActionResult> UpdateSpecificMenu(MenuDTO menu)

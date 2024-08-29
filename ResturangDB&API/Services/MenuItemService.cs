@@ -36,7 +36,8 @@ namespace ResturangDB_API.Services
                 MenuItemID = menuItem.MenuItemID,
                 Name = menuItem.Name,
                 Price = menuItem.Price,
-                IsAvailable = menuItem.IsAvailable
+                IsAvailable = menuItem.IsAvailable,
+                FK_MenuID = menuItem.FK_MenuID
             }).ToList();
         }
 
@@ -54,7 +55,8 @@ namespace ResturangDB_API.Services
                 MenuItemID = menuItem.MenuItemID,
                 Name = menuItem.Name,
                 Price = menuItem.Price,
-                IsAvailable = menuItem.IsAvailable
+                IsAvailable = menuItem.IsAvailable,
+                FK_MenuID = menuItem.FK_MenuID
             };
         }
 

@@ -60,6 +60,42 @@ namespace ResturangDB_API.Data
                     new Menu { MenuID = 1, Name = "Main Menu" },
                     new Menu { MenuID = 2, Name = "Drink Menu" }
                 );
+
+            modelBuilder.Entity<MenuItem>().HasData
+                (
+                    // Main Menu
+                    new MenuItem { MenuItemID = 1, Name = "Bolognese", Price = 130, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 2, Name = "Margherita Pizza", Price = 120, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 3, Name = "Caesar Salad", Price = 95, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 4, Name = "Grilled Chicken", Price = 150, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 5, Name = "Fish Tacos", Price = 110, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 6, Name = "BBQ Ribs", Price = 200, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 7, Name = "Beef Stroganoff", Price = 160, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 8, Name = "Vegetable Stir-Fry", Price = 100, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 9, Name = "Spaghetti Carbonara", Price = 135, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 10, Name = "Lasagna", Price = 140, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 11, Name = "Chicken Alfredo", Price = 145, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 12, Name = "Garlic Bread", Price = 50, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 13, Name = "French Fries", Price = 40, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 14, Name = "Cheeseburger", Price = 110, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 15, Name = "Greek Salad", Price = 85, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 16, Name = "Mushroom Risotto", Price = 130, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 17, Name = "Tuna Sandwich", Price = 75, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 18, Name = "Pancakes", Price = 90, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 19, Name = "Chocolate Cake", Price = 60, IsAvailable = true, FK_MenuID = 1 },
+                    new MenuItem { MenuItemID = 20, Name = "Ice Cream Sundae", Price = 70, IsAvailable = true, FK_MenuID = 1 },
+                    // Drink Menu
+                    new MenuItem { MenuItemID = 21, Name = "Coca-Cola", Price = 25, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 22, Name = "Sprite", Price = 25, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 23, Name = "Fanta", Price = 25, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 24, Name = "Pepsi", Price = 25, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 25, Name = "Iced Tea", Price = 30, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 26, Name = "Lemonade", Price = 30, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 27, Name = "Orange Juice", Price = 35, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 28, Name = "Apple Juice", Price = 35, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 29, Name = "Mineral Water", Price = 20, IsAvailable = true, FK_MenuID = 2 },
+                    new MenuItem { MenuItemID = 30, Name = "Sparkling Water", Price = 25, IsAvailable = true, FK_MenuID = 2 }
+                );
         }
     }
 }

@@ -161,6 +161,43 @@ namespace ResturangDB_API.Migrations
                     { 20, true, 20, 8 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "MenuItems",
+                columns: new[] { "MenuItemID", "FK_MenuID", "IsAvailable", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, 1, true, "Bolognese", 130 },
+                    { 2, 1, true, "Margherita Pizza", 120 },
+                    { 3, 1, true, "Caesar Salad", 95 },
+                    { 4, 1, true, "Grilled Chicken", 150 },
+                    { 5, 1, true, "Fish Tacos", 110 },
+                    { 6, 1, true, "BBQ Ribs", 200 },
+                    { 7, 1, true, "Beef Stroganoff", 160 },
+                    { 8, 1, true, "Vegetable Stir-Fry", 100 },
+                    { 9, 1, true, "Spaghetti Carbonara", 135 },
+                    { 10, 1, true, "Lasagna", 140 },
+                    { 11, 1, true, "Chicken Alfredo", 145 },
+                    { 12, 1, true, "Garlic Bread", 50 },
+                    { 13, 1, true, "French Fries", 40 },
+                    { 14, 1, true, "Cheeseburger", 110 },
+                    { 15, 1, true, "Greek Salad", 85 },
+                    { 16, 1, true, "Mushroom Risotto", 130 },
+                    { 17, 1, true, "Tuna Sandwich", 75 },
+                    { 18, 1, true, "Pancakes", 90 },
+                    { 19, 1, true, "Chocolate Cake", 60 },
+                    { 20, 1, true, "Ice Cream Sundae", 70 },
+                    { 21, 2, true, "Coca-Cola", 25 },
+                    { 22, 2, true, "Sprite", 25 },
+                    { 23, 2, true, "Fanta", 25 },
+                    { 24, 2, true, "Pepsi", 25 },
+                    { 25, 2, true, "Iced Tea", 30 },
+                    { 26, 2, true, "Lemonade", 30 },
+                    { 27, 2, true, "Orange Juice", 35 },
+                    { 28, 2, true, "Apple Juice", 35 },
+                    { 29, 2, true, "Mineral Water", 20 },
+                    { 30, 2, true, "Sparkling Water", 25 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_FK_CustomerID",
                 table: "Bookings",

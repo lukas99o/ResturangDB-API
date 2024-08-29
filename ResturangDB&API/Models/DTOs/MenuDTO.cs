@@ -4,5 +4,6 @@
     {
         public int MenuID { get; set; }
         public string Name { get; set; }
+        public ICollection<MenuItem> MenuItems { get; set; }
     }
 }

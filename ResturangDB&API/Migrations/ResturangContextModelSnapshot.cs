@@ -209,6 +209,248 @@ namespace ResturangDB_API.Migrations
                     b.HasIndex("FK_MenuID");
 
                     b.ToTable("MenuItems");
+
+                    b.HasData(
+                        new
+                        {
+                            MenuItemID = 1,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Bolognese",
+                            Price = 130
+                        },
+                        new
+                        {
+                            MenuItemID = 2,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Margherita Pizza",
+                            Price = 120
+                        },
+                        new
+                        {
+                            MenuItemID = 3,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Caesar Salad",
+                            Price = 95
+                        },
+                        new
+                        {
+                            MenuItemID = 4,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Grilled Chicken",
+                            Price = 150
+                        },
+                        new
+                        {
+                            MenuItemID = 5,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Fish Tacos",
+                            Price = 110
+                        },
+                        new
+                        {
+                            MenuItemID = 6,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "BBQ Ribs",
+                            Price = 200
+                        },
+                        new
+                        {
+                            MenuItemID = 7,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Beef Stroganoff",
+                            Price = 160
+                        },
+                        new
+                        {
+                            MenuItemID = 8,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Vegetable Stir-Fry",
+                            Price = 100
+                        },
+                        new
+                        {
+                            MenuItemID = 9,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Spaghetti Carbonara",
+                            Price = 135
+                        },
+                        new
+                        {
+                            MenuItemID = 10,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Lasagna",
+                            Price = 140
+                        },
+                        new
+                        {
+                            MenuItemID = 11,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Chicken Alfredo",
+                            Price = 145
+                        },
+                        new
+                        {
+                            MenuItemID = 12,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Garlic Bread",
+                            Price = 50
+                        },
+                        new
+                        {
+                            MenuItemID = 13,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "French Fries",
+                            Price = 40
+                        },
+                        new
+                        {
+                            MenuItemID = 14,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Cheeseburger",
+                            Price = 110
+                        },
+                        new
+                        {
+                            MenuItemID = 15,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Greek Salad",
+                            Price = 85
+                        },
+                        new
+                        {
+                            MenuItemID = 16,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Mushroom Risotto",
+                            Price = 130
+                        },
+                        new
+                        {
+                            MenuItemID = 17,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Tuna Sandwich",
+                            Price = 75
+                        },
+                        new
+                        {
+                            MenuItemID = 18,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Pancakes",
+                            Price = 90
+                        },
+                        new
+                        {
+                            MenuItemID = 19,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Chocolate Cake",
+                            Price = 60
+                        },
+                        new
+                        {
+                            MenuItemID = 20,
+                            FK_MenuID = 1,
+                            IsAvailable = true,
+                            Name = "Ice Cream Sundae",
+                            Price = 70
+                        },
+                        new
+                        {
+                            MenuItemID = 21,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Coca-Cola",
+                            Price = 25
+                        },
+                        new
+                        {
+                            MenuItemID = 22,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Sprite",
+                            Price = 25
+                        },
+                        new
+                        {
+                            MenuItemID = 23,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Fanta",
+                            Price = 25
+                        },
+                        new
+                        {
+                            MenuItemID = 24,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Pepsi",
+                            Price = 25
+                        },
+                        new
+                        {
+                            MenuItemID = 25,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Iced Tea",
+                            Price = 30
+                        },
+                        new
+                        {
+                            MenuItemID = 26,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Lemonade",
+                            Price = 30
+                        },
+                        new
+                        {
+                            MenuItemID = 27,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Orange Juice",
+                            Price = 35
+                        },
+                        new
+                        {
+                            MenuItemID = 28,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Apple Juice",
+                            Price = 35
+                        },
+                        new
+                        {
+                            MenuItemID = 29,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Mineral Water",
+                            Price = 20
+                        },
+                        new
+                        {
+                            MenuItemID = 30,
+                            FK_MenuID = 2,
+                            IsAvailable = true,
+                            Name = "Sparkling Water",
+                            Price = 25
+                        });
                 });
 
             modelBuilder.Entity("ResturangDB_API.Models.Table", b =>

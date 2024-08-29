@@ -51,6 +51,18 @@ namespace ResturangDB_API.Services
             };
         }
 
+        public async Task<MenuDTO> GetAllItemsFromMenu(int menuID)
+        {
+            var menu = await _menuRepo.GetMenuByIdAsync(menuID);
+
+            if (menu == null)
+            {
+                return null;
+            }
+
+            
+        }
+
         public async Task UpdateMenuAsync(MenuDTO menu)
         {
             var updatedMenu = new Menu
