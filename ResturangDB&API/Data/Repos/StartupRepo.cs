@@ -13,22 +13,46 @@ namespace ResturangDB_API.Data.Repos
             _context = context;
         }
 
-        public async Task IsTableAvailableAsync()
+        //public async Task IsTableAvailableAsync()
+        //{
+        //    var tables = await _context.Tables.ToListAsync();
+        //    var bookings = await _context.Bookings.ToListAsync();
+
+        //    foreach (var booking in bookings)
+        //    {
+        //        var bookedTable = tables.SingleOrDefault(t => t.TableID == booking.FK_TableID);
+
+        //        if (bookedTable != null && DateTime.Now >= booking.BookingTimeEnd)
+        //        {
+        //            bookedTable.IsAvailable = true;
+        //        }
+        //    }
+
+        //    await _context.SaveChangesAsync();
+        //}
+
+        public async Task UpdateTableAvailabilityAsync()
         {
-            var tables = await _context.Tables.ToListAsync();
-            var bookings = await _context.Bookings.ToListAsync();
+            var endedBookings = await _context.Bookings
+                .Where(b => DateTime.Now >= b.BookingTimeEnd && b.BookingDay == DateTime.Now.Date)
+                .ToListAsync();
 
-            foreach (var booking in bookings)
+            var tableIdsToMarkAvailable = endedBookings
+                .Select(b => b.FK_TableID)
+                .Distinct()
+                .ToList();
+
+            var tablesToUpdate = await _context.Tables
+                .Where(t => tableIdsToMarkAvailable.Contains(t.TableID))
+                .ToListAsync();
+
+            foreach (var table in tablesToUpdate)
             {
-                var bookedTable = tables.SingleOrDefault(t => t.TableID == booking.FK_TableID);
-
-                if (bookedTable != null && DateTime.Now >= booking.BookingTimeEnd)
-                {
-                    bookedTable.IsAvailable = true;
-                }
+                table.IsAvailable = true;
             }
 
             await _context.SaveChangesAsync();
         }
+
     }
 }

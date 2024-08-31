@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ResturangDB_API.Models;
 using ResturangDB_API.Models.DTOs;
+using ResturangDB_API.Services;
 using ResturangDB_API.Services.IServices;
 
 namespace ResturangDB_API.Controllers
@@ -32,10 +33,16 @@ namespace ResturangDB_API.Controllers
 
         [HttpGet]
         [Route("GetSpecificCustomer")]
-        public async Task<ActionResult> GetSpecificCustomer(int customerID)
+        public async Task<ActionResult<CustomerDTO>> GetSpecificCustomer(int customerID)
         {
-            await _customerService.GetCustomerByIdAsync(customerID);
-            return Ok();
+            var customer = await _customerService.GetCustomerByIdAsync(customerID);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(customer);
         }
 
         [HttpPut]

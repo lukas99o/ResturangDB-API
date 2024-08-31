@@ -43,17 +43,17 @@ namespace ResturangDB_API.Controllers
         }
 
         [HttpGet]
-        [Route("GetItemsFromMenu")]
-        public async Task<ActionResult<MenuDTO>> GetItemsFromMenu(int menuID)
+        [Route("GetMenuItemsFromMenu")]
+        public async Task<ActionResult<IEnumerable<MenuItemDTO>>> GetMenuItemsFromMenu(int menuID)
         {
-            var menu = await _menuService.GetMenuByIdAsync(menuID);
+            var menuItems = await _menuService.GetMenuItemsAsync(menuID);
 
-            if (menu == null)
+            if (menuItems == null || !menuItems.Any())
             {
                 return NotFound();
             }
 
-            return Ok(menu);
+            return Ok(menuItems);
         }
 
         [HttpPut]

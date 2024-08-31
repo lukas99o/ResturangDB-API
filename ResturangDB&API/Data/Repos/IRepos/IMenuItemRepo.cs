@@ -7,6 +7,7 @@ namespace ResturangDB_API.Data.Repos.IRepos
         Task AddMenuItemAsync(MenuItem menuItem);
         Task<IEnumerable<MenuItem>> GetAllMenuItemsAsync();
         Task<MenuItem> GetMenuItemByIDAsync(int menuItemID);
+        //Task<IEnumerable<MenuItem>> GetMenuItemsFromSpecificMenu(int menuID);
         Task UpdateMenuItemAsync(MenuItem menuItem);
         Task DeleteMenuItemAsync(int menuItemID);
     }

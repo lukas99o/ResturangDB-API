@@ -65,7 +65,8 @@ namespace ResturangDB_API.Services
                 FK_TableID = booking.FK_TableID,
                 AmountOfPeople = booking.AmountOfPeople,
                 BookingDay = booking.BookingDay,
-                BookingTime = booking.BookingTime
+                BookingTime = booking.BookingTime,
+                BookingTimeEnd = booking.BookingTimeEnd
             };
         }
 
@@ -78,7 +79,8 @@ namespace ResturangDB_API.Services
                 FK_TableID = booking.FK_TableID,
                 AmountOfPeople = booking.AmountOfPeople,
                 BookingDay = booking.BookingDay,
-                BookingTime = booking.BookingTime
+                BookingTime = booking.BookingTime,
+                BookingTimeEnd = booking.BookingTimeEnd
             };
 
             await _bookingRepo.UpdateBookingAsync(updatedBooking);

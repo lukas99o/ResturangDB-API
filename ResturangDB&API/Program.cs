@@ -31,7 +31,7 @@ using (var scope = app.Services.CreateScope())
 {
     var startupRepo = scope.ServiceProvider.GetRequiredService<StartupRepo>();
 
-    await startupRepo.IsTableAvailableAsync();
+    await startupRepo.UpdateTableAvailabilityAsync();
 }
 
 // Configure the HTTP request pipeline.

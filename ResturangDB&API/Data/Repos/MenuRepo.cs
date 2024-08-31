@@ -31,6 +31,13 @@ namespace ResturangDB_API.Data.Repos
             return menu;
         }
 
+        public async Task<Menu> GetMenuWithItemsAsync(int menuID)
+        {
+            return await _context.Menus
+                .Include(m => m.MenuItems)
+                .FirstOrDefaultAsync(m => m.MenuID == menuID);
+        }
+
         public async Task UpdateMenuAsync(Menu menu)
         {
             _context.Menus.Update(menu);

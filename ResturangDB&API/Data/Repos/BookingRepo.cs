@@ -18,17 +18,27 @@ namespace ResturangDB_API.Data.Repos
         {
             var tableToBeBooked = await _context.Tables.SingleOrDefaultAsync(t => t.TableID == booking.FK_TableID);
 
-            if (tableToBeBooked != null && tableToBeBooked.IsAvailable)
+            if (tableToBeBooked == null)
+            {
+                throw new Exception($"This table doe's not exist");
+            }
+            else if (tableToBeBooked.TableSeats < booking.AmountOfPeople)
+            {
+                throw new Exception("Your company is to large for this table you need a table with more seats.");
+            }
+            else if (!tableToBeBooked.IsAvailable)
+            {
+                throw new Exception("Try another table this one is booked!");
+            }
+            else if (booking.BookingDay < DateTime.Now.Date || booking.BookingTime < DateTime.Now || booking.BookingTimeEnd <= booking.BookingTime)
+            {
+                throw new Exception("Please input a valid booking time.");
+            }
+            else
             {
                 tableToBeBooked.IsAvailable = false;
                 await _context.Bookings.AddAsync(booking);
                 await _context.SaveChangesAsync();
-                Console.WriteLine("Table Available: " + tableToBeBooked.IsAvailable);
-                Console.WriteLine("TableID: " + tableToBeBooked.TableID);
-            } 
-            else
-            {
-                throw new Exception("Try another table this one is booked!");
             }
         }
 
@@ -46,8 +56,30 @@ namespace ResturangDB_API.Data.Repos
 
         public async Task UpdateBookingAsync(Booking booking)
         {
-            _context.Bookings.Update(booking);
-            await _context.SaveChangesAsync();
+            var bookedTable = await _context.Tables.SingleOrDefaultAsync(t => t.TableID == booking.FK_TableID);
+
+            if (bookedTable == null)
+            {
+                throw new Exception($"This table doe's not exist");
+            }
+            else if (bookedTable.TableSeats < booking.AmountOfPeople)
+            {
+                throw new Exception("Your company is to large for this table you need a table with more seats.");
+            }
+            else if (!bookedTable.IsAvailable)
+            {
+                throw new Exception("Try another table this one is booked!");
+            }
+            else if (booking.BookingDay < DateTime.Now.Date || booking.BookingTime < DateTime.Now || booking.BookingTimeEnd <= booking.BookingTime)
+            {
+                throw new Exception("Please input a valid booking time.");
+            }
+            else
+            {
+                bookedTable.IsAvailable = false;
+                _context.Bookings.Update(booking);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteBookingAsync(int bookingID)

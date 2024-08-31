@@ -2,16 +2,19 @@
 using ResturangDB_API.Models.DTOs;
 using ResturangDB_API.Models;
 using ResturangDB_API.Services.IServices;
+using System.Collections.Immutable;
 
 namespace ResturangDB_API.Services
 {
     public class MenuService : IMenuService
     {
         private readonly IMenuRepo _menuRepo;
+        private readonly IMenuItemRepo _menuItemRepo;
 
-        public MenuService(IMenuRepo menuRepo)
+        public MenuService(IMenuRepo menuRepo, IMenuItemRepo menuItemRepo)
         {
             _menuRepo = menuRepo;
+            _menuItemRepo = menuItemRepo;
         }
 
         public async Task AddMenuAsync(MenuDTO menu)
@@ -51,16 +54,25 @@ namespace ResturangDB_API.Services
             };
         }
 
-        public async Task<MenuDTO> GetAllItemsFromMenu(int menuID)
+        public async Task<IEnumerable<MenuItemDTO>> GetMenuItemsAsync(int menuID)
         {
-            var menu = await _menuRepo.GetMenuByIdAsync(menuID);
-
-            if (menu == null)
+            var menu = await _menuRepo.GetMenuWithItemsAsync(menuID);
+            
+            if (menu == null || menu.MenuItems == null)
             {
-                return null;
+                return new List<MenuItemDTO>();
             }
 
-            
+            var menuItemDtos = menu.MenuItems.Select(menuItem => new MenuItemDTO
+            {
+                MenuItemID = menuItem.MenuItemID,
+                Name = menuItem.Name,
+                Price = menuItem.Price,
+                IsAvailable = menuItem.IsAvailable,
+                FK_MenuID = menuItem.FK_MenuID
+            }).ToList();
+
+            return menuItemDtos;
         }
 
         public async Task UpdateMenuAsync(MenuDTO menu)

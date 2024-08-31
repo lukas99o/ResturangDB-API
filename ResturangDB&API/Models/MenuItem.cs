@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ResturangDB_API.Models
 {
@@ -19,6 +20,8 @@ namespace ResturangDB_API.Models
 
         [ForeignKey("Menu")]
         public int FK_MenuID { get; set; }
+
+        [JsonIgnore]
         public Menu Menu { get; set; }
     }
 }
