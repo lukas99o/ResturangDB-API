@@ -29,5 +29,4 @@ Database.
 ## A couple more notes:
 MenuItem needs you to supply if the item is available this is just true or false. Also you need to
 supply a Foreign key to the specific menu that the MenuItem belongs to. For example the Database comes
-with some data for you to play around with and there is a MainMenu and a Drinks Menu if you want to
-add to MainMenu supply Foreign key 1 etc.
+with some data for you to play around with and there is a Main Menu and a Drinks Menu if you want to add to Main Menu input Foreign key 1 etc.
