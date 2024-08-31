@@ -63,7 +63,8 @@ namespace ResturangDB_API.Services
             {
                 TableID = table.TableID,
                 TableNumber = table.TableNumber,
-                TableSeats = table.TableSeats
+                TableSeats = table.TableSeats,
+                IsAvailable = table.IsAvailable
             };
 
             await _tableRepo.UpdateTableAsync(updatedTable);
