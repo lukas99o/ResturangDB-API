@@ -21,12 +21,22 @@ BookingTimeEnd: yyyy-MM-dd hh:mm
 * UpdateBooking: Same as CreateBooking but you have to supply BookingID for the specific Booking you
 would like to update
 * DeleteBooking: Supply BookingID and execute
+#### Here is an example: 
+```csharp
+{
+  "customerID": 1,
+  "tableID": 1,
+  "amountOfPeople": 2,
+  "date": "2024-09-25",
+  "time": "2024-09-25T08:30:00",
+  "timeEnd": "2024-09-25T09:30:00"
+}
+```
 
-Since its crud operations this pattern continues through the rest of the API calls. You are not supposed to
-supply id to the "add operations" because it will automaticly give it a id based on the current ids in the 
-Database.
+Since its crud operations this pattern continues through the rest of the API calls.
 
 ## A couple more notes:
 MenuItem needs you to supply if the item is available this is just true or false. Also you need to
 supply a Foreign key to the specific menu that the MenuItem belongs to. For example the Database comes
-with some data for you to play around with and there is a Main Menu and a Drinks Menu if you want to add to Main Menu input Foreign key 1 etc.
+with some data for you to play around with and there is a Main Menu and a Drinks Menu if you want to add to Main Menu input Foreign key 1 etc. 
+Table also has an isAvailable variable and you just need to set true or false.
