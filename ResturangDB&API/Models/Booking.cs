@@ -20,12 +20,12 @@ namespace ResturangDB_API.Models
         public int AmountOfPeople { get; set; }
 
         [Required]
-        public DateTime BookingDay { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
-        public DateTime BookingTime { get; set; }
+        public DateTime Time { get; set; }
 
         [Required]
-        public DateTime BookingTimeEnd { get; set; }
+        public DateTime TimeEnd { get; set; }
     }
 }

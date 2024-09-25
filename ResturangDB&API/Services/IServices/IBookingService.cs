@@ -1,13 +1,13 @@
-﻿using ResturangDB_API.Models.DTOs;
+﻿using ResturangDB_API.Models.DTOs.Booking;
 
 namespace ResturangDB_API.Services.IServices
 {
     public interface IBookingService
     {
-        Task AddBookingAsync(BookingDTO booking);
-        Task<IEnumerable<BookingDTO>> GetAllBookingsAsync();
-        Task<BookingDTO> GetBookingByIdAsync(int bookingID);
-        Task UpdateBookingAsync(BookingDTO booking);
-        Task DeleteBookingAsync(int bookingID);
+        Task AddBookingAsync(BookingCreateDTO booking);
+        Task<IEnumerable<BookingGetDTO>> GetAllBookingsAsync();
+        Task<BookingGetDTO> GetBookingByIdAsync(int bookingID);
+        Task<bool> UpdateBookingAsync(BookingUpdateDTO booking);
+        Task<bool> DeleteBookingAsync(int bookingID);
     }
 }

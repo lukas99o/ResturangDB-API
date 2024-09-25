@@ -1,13 +1,13 @@
-﻿using ResturangDB_API.Models.DTOs;
+﻿using ResturangDB_API.Models.DTOs.MenuItem;
 
 namespace ResturangDB_API.Services.IServices
 {
     public interface IMenuItemService
     {
-        Task AddMenuItemAsync(MenuItemDTO menuItem);
-        Task<IEnumerable<MenuItemDTO>> GetAllMenuItemsAsync();
-        Task<MenuItemDTO> GetMenuItemByIdAsync(int menuItemID);
-        Task UpdateMenuItemAsync(MenuItemDTO menuItem);
-        Task DeleteMenuItemAsync(int menuItemID);
+        Task AddMenuItemAsync(MenuItemCreateDTO menuItem);
+        Task<IEnumerable<MenuItemGetDTO>> GetAllMenuItemsAsync();
+        Task<MenuItemGetDTO> GetMenuItemByIdAsync(int menuItemID);
+        Task<bool> UpdateMenuItemAsync(MenuItemUpdateDTO menuItem);
+        Task<bool> DeleteMenuItemAsync(int menuItemID);
     }
 }

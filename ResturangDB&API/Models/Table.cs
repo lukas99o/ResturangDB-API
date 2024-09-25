@@ -10,9 +10,6 @@ namespace ResturangDB_API.Models
         [Required]
         public int TableSeats { get; set; }
 
-        [Required]
-        public int TableNumber { get; set; }
-
         public bool IsAvailable { get; set; } = true;
 
         public ICollection<Booking> Bookings { get; set; }

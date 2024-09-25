@@ -44,15 +44,9 @@ namespace ResturangDB_API.Data.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteMenuAsync(int menuID)
+        public async Task DeleteMenuAsync(Menu menu)
         {
-            var menu = await _context.Menus.FindAsync(menuID);
-
-            if (menu != null)
-            {
-                _context.Menus.Remove(menu);
-            }
-
+            _context.Menus.Remove(menu);
             await _context.SaveChangesAsync();
         }
     }

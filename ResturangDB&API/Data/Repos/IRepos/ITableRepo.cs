@@ -8,6 +8,6 @@ namespace ResturangDB_API.Data.Repos.IRepos
         Task<IEnumerable<Table>> GetAllTablesAsync();
         Task<Table> GetTableByIDAsync(int tableID);
         Task UpdateTableAsync(Table table);
-        Task DeleteTableAsync(int tableID);
+        Task DeleteTableAsync(Table table);
     }
 }

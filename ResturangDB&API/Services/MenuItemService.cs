@@ -1,7 +1,7 @@
 ﻿using ResturangDB_API.Data.Repos.IRepos;
-using ResturangDB_API.Models.DTOs;
 using ResturangDB_API.Models;
 using ResturangDB_API.Services.IServices;
+using ResturangDB_API.Models.DTOs.MenuItem;
 
 namespace ResturangDB_API.Services
 {
@@ -14,69 +14,88 @@ namespace ResturangDB_API.Services
             _menuItemRepo = menuItemRepo;
         }
 
-        public async Task AddMenuItemAsync(MenuItemDTO menuItem)
+        public async Task AddMenuItemAsync(MenuItemCreateDTO menuItemCreate)
         {
-            var newMenuItem = new MenuItem
+            var menuItem = new MenuItem
             {
-                MenuItemID = menuItem.MenuItemID,
-                Name = menuItem.Name,
-                Price = menuItem.Price,
-                IsAvailable = menuItem.IsAvailable,
-                FK_MenuID = menuItem.FK_MenuID
+                Name = menuItemCreate.Name,
+                Price = menuItemCreate.Price,
+                IsAvailable = menuItemCreate.IsAvailable,
+                FK_MenuID = menuItemCreate.MenuID
             };
 
-            await _menuItemRepo.AddMenuItemAsync(newMenuItem);
+            await _menuItemRepo.AddMenuItemAsync(menuItem);
         }
 
-        public async Task<IEnumerable<MenuItemDTO>> GetAllMenuItemsAsync()
+        public async Task<IEnumerable<MenuItemGetDTO>> GetAllMenuItemsAsync()
         {
-            var menuItemList = await _menuItemRepo.GetAllMenuItemsAsync();
-            return menuItemList.Select(menuItem => new MenuItemDTO
+            var menuItems = await _menuItemRepo.GetAllMenuItemsAsync();
+
+            var menuItemList = menuItems.Select(menuItem => new MenuItemGetDTO
             {
                 MenuItemID = menuItem.MenuItemID,
+                MenuID = menuItem.FK_MenuID,
                 Name = menuItem.Name,
                 Price = menuItem.Price,
-                IsAvailable = menuItem.IsAvailable,
-                FK_MenuID = menuItem.FK_MenuID
+                IsAvailable = menuItem.IsAvailable
             }).ToList();
+
+            return menuItemList;
         }
 
-        public async Task<MenuItemDTO> GetMenuItemByIdAsync(int menuItemID)
+        public async Task<MenuItemGetDTO> GetMenuItemByIdAsync(int menuItemID)
         {
-            var menuItem = await _menuItemRepo.GetMenuItemByIDAsync(menuItemID);
+            var menuItemFound = await _menuItemRepo.GetMenuItemByIDAsync(menuItemID);
 
-            if (menuItem == null)
+            if (menuItemFound != null)
             {
-                return null;
+                var menuItem = new MenuItemGetDTO
+                {
+                    MenuItemID = menuItemFound.MenuItemID,
+                    MenuID = menuItemFound.FK_MenuID,
+                    Name = menuItemFound.Name,
+                    Price = menuItemFound.Price,
+                    IsAvailable = menuItemFound.IsAvailable
+                };
+
+                return menuItem;
             }
 
-            return new MenuItemDTO
-            {
-                MenuItemID = menuItem.MenuItemID,
-                Name = menuItem.Name,
-                Price = menuItem.Price,
-                IsAvailable = menuItem.IsAvailable,
-                FK_MenuID = menuItem.FK_MenuID
-            };
+            return null;
         }
 
-        public async Task UpdateMenuItemAsync(MenuItemDTO menuItem)
+        public async Task<bool> UpdateMenuItemAsync(MenuItemUpdateDTO menuItem)
         {
-            var updatedMenuItem = new MenuItem
+            if (string.IsNullOrEmpty(menuItem.Name))
             {
-                MenuItemID = menuItem.MenuItemID,
-                Name = menuItem.Name,
-                Price = menuItem.Price,
-                IsAvailable = menuItem.IsAvailable,
-                FK_MenuID = menuItem.FK_MenuID
-            };
+                return false;
+            }
 
-            await _menuItemRepo.UpdateMenuItemAsync(updatedMenuItem);
+            var foundMenuItem = await _menuItemRepo.GetMenuItemByIDAsync(menuItem.MenuItemID);
+
+            if (foundMenuItem != null)
+            {
+                foundMenuItem.Price = menuItem.Price;
+                foundMenuItem.IsAvailable = menuItem.IsAvailable;
+                await _menuItemRepo.UpdateMenuItemAsync(foundMenuItem);
+
+                return true;
+            }
+
+            return false;
         }
 
-        public async Task DeleteMenuItemAsync(int menuItemID)
+        public async Task<bool> DeleteMenuItemAsync(int menuItemID)
         {
-            await _menuItemRepo.DeleteMenuItemAsync(menuItemID);
+            var foundMenuItem = await _menuItemRepo.GetMenuItemByIDAsync(menuItemID);
+
+            if (foundMenuItem != null)
+            {
+                await _menuItemRepo.DeleteMenuItemAsync(foundMenuItem);
+                return true;
+            }
+
+            return false;
         }
     }
 }

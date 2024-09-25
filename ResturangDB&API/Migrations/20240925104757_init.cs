@@ -48,7 +48,6 @@ namespace ResturangDB_API.Migrations
                     TableID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TableSeats = table.Column<int>(type: "int", nullable: false),
-                    TableNumber = table.Column<int>(type: "int", nullable: false),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -87,9 +86,9 @@ namespace ResturangDB_API.Migrations
                     FK_CustomerID = table.Column<int>(type: "int", nullable: false),
                     FK_TableID = table.Column<int>(type: "int", nullable: false),
                     AmountOfPeople = table.Column<int>(type: "int", nullable: false),
-                    BookingDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BookingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BookingTimeEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,29 +135,29 @@ namespace ResturangDB_API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Tables",
-                columns: new[] { "TableID", "IsAvailable", "TableNumber", "TableSeats" },
+                columns: new[] { "TableID", "IsAvailable", "TableSeats" },
                 values: new object[,]
                 {
-                    { 1, true, 1, 2 },
-                    { 2, true, 2, 4 },
-                    { 3, true, 3, 6 },
-                    { 4, true, 4, 2 },
-                    { 5, true, 5, 8 },
-                    { 6, true, 6, 4 },
-                    { 7, true, 7, 10 },
-                    { 8, true, 8, 2 },
-                    { 9, true, 9, 6 },
-                    { 10, true, 10, 4 },
-                    { 11, true, 11, 8 },
-                    { 12, true, 12, 2 },
-                    { 13, true, 13, 10 },
-                    { 14, true, 14, 4 },
-                    { 15, true, 15, 6 },
-                    { 16, true, 16, 8 },
-                    { 17, true, 17, 2 },
-                    { 18, true, 18, 4 },
-                    { 19, true, 19, 6 },
-                    { 20, true, 20, 8 }
+                    { 1, true, 2 },
+                    { 2, true, 4 },
+                    { 3, true, 6 },
+                    { 4, true, 2 },
+                    { 5, true, 8 },
+                    { 6, true, 4 },
+                    { 7, true, 10 },
+                    { 8, true, 2 },
+                    { 9, true, 6 },
+                    { 10, true, 4 },
+                    { 11, true, 8 },
+                    { 12, true, 2 },
+                    { 13, true, 10 },
+                    { 14, true, 4 },
+                    { 15, true, 6 },
+                    { 16, true, 8 },
+                    { 17, true, 2 },
+                    { 18, true, 4 },
+                    { 19, true, 6 },
+                    { 20, true, 8 }
                 });
 
             migrationBuilder.InsertData(

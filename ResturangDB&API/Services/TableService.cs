@@ -1,6 +1,6 @@
 ﻿using ResturangDB_API.Data.Repos.IRepos;
 using ResturangDB_API.Models;
-using ResturangDB_API.Models.DTOs;
+using ResturangDB_API.Models.DTOs.Table;
 using ResturangDB_API.Services.IServices;
 
 namespace ResturangDB_API.Services
@@ -14,65 +14,77 @@ namespace ResturangDB_API.Services
             _tableRepo = tableRepo;
         }
 
-        public async Task AddTableAsync(TableDTO table)
+        public async Task AddTableAsync(TableCreateDTO tableCreate)
         {
-            var newTable = new Table
+            var table = new Table
             {
-                TableID = table.TableID,
-                TableNumber = table.TableNumber,
-                TableSeats = table.TableSeats,
-                IsAvailable = table.IsAvailable
+                TableSeats = tableCreate.TableSeats,
+                IsAvailable = tableCreate.IsAvailable
             };
 
-            await _tableRepo.AddTableAsync(newTable);
+            await _tableRepo.AddTableAsync(table);
         }
 
-        public async Task<IEnumerable<TableDTO>> GetAllTablesAsync()
+        public async Task<IEnumerable<TableGetDTO>> GetAllTablesAsync()
         {
-            var tableList = await _tableRepo.GetAllTablesAsync();
-            return tableList.Select(table => new TableDTO
+            var tables = await _tableRepo.GetAllTablesAsync();
+
+            var tableList = tables.Select(table => new TableGetDTO
             {
                 TableID = table.TableID,
-                TableNumber = table.TableNumber,
                 TableSeats = table.TableSeats,
                 IsAvailable = table.IsAvailable
             }).ToList();
+
+            return tableList;
         }
 
-        public async Task<TableDTO> GetTableByIdAsync(int tableID)
+        public async Task<TableGetDTO> GetTableByIdAsync(int tableID)
         {
-            var table = await _tableRepo.GetTableByIDAsync(tableID);
+            var tableFound = await _tableRepo.GetTableByIDAsync(tableID);
 
-            if (table == null)
+            if (tableFound != null)
             {
-                return null;
+                var table = new TableGetDTO
+                {
+                    TableID = tableFound.TableID,
+                    TableSeats = tableFound.TableSeats,
+                    IsAvailable = tableFound.IsAvailable
+                };
+
+                return table;
             }
 
-            return new TableDTO
-            {
-                TableID = table.TableID,
-                TableNumber = table.TableNumber,
-                TableSeats = table.TableSeats,
-                IsAvailable = table.IsAvailable
-            };
+            return null;
         }
 
-        public async Task UpdateTableAsync(TableDTO table)
+        public async Task<bool> UpdateTableAsync(TableUpdateDTO table)
         {
-            var updatedTable = new Table
-            {
-                TableID = table.TableID,
-                TableNumber = table.TableNumber,
-                TableSeats = table.TableSeats,
-                IsAvailable = table.IsAvailable
-            };
+            var updatedTable = await _tableRepo.GetTableByIDAsync(table.TableID);
 
-            await _tableRepo.UpdateTableAsync(updatedTable);
+            if (updatedTable != null)
+            {
+                updatedTable.TableSeats = table.TableSeats;
+                updatedTable.IsAvailable = table.IsAvailable;
+                await _tableRepo.UpdateTableAsync(updatedTable);
+
+                return true;
+            }
+
+            return false;
         }
 
-        public async Task DeleteTableAsync(int tableID)
+        public async Task<bool> DeleteTableAsync(int tableID)
         {
-            await _tableRepo.DeleteTableAsync(tableID);
+            var foundTable = await _tableRepo.GetTableByIDAsync(tableID);
+
+            if (foundTable != null)
+            {
+                await _tableRepo.DeleteTableAsync(foundTable);
+                return true;
+            }
+
+            return false;
         }
     }
 }

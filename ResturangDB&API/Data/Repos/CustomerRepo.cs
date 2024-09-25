@@ -37,15 +37,9 @@ namespace ResturangDB_API.Data.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteCustomerAsync(int customerID)
+        public async Task DeleteCustomerAsync(Customer customer)
         {
-            var customer = await _context.Customers.FindAsync(customerID);
-
-            if (customer != null)
-            {
-                _context.Customers.Remove(customer);
-            }
-
+            _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
         }
     }

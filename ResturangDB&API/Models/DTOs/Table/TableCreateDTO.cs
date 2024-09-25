@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ResturangDB_API.Models.DTOs
+namespace ResturangDB_API.Models.DTOs.Table
 {
-    public class TableDTO
+    public class TableCreateDTO
     {
-        public int TableID { get; set; }
         public int TableSeats { get; set; }
-        public int TableNumber { get; set; }
         public bool IsAvailable { get; set; } = true;
     }
 }

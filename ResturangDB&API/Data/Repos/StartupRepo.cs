@@ -34,7 +34,7 @@ namespace ResturangDB_API.Data.Repos
         public async Task UpdateTableAvailabilityAsync()
         {
             var endedBookings = await _context.Bookings
-                .Where(b => DateTime.Now >= b.BookingTimeEnd && b.BookingDay == DateTime.Now.Date)
+                .Where(b => DateTime.Now >= b.TimeEnd && b.Date == DateTime.Now.Date)
                 .ToListAsync();
 
             var tableIdsToMarkAvailable = endedBookings

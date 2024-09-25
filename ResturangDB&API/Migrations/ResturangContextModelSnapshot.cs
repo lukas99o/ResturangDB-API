@@ -33,13 +33,7 @@ namespace ResturangDB_API.Migrations
                     b.Property<int>("AmountOfPeople")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("BookingDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("BookingTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("BookingTimeEnd")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FK_CustomerID")
@@ -47,6 +41,12 @@ namespace ResturangDB_API.Migrations
 
                     b.Property<int>("FK_TableID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TimeEnd")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("BookingID");
 
@@ -464,9 +464,6 @@ namespace ResturangDB_API.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TableNumber")
-                        .HasColumnType("int");
-
                     b.Property<int>("TableSeats")
                         .HasColumnType("int");
 
@@ -479,140 +476,120 @@ namespace ResturangDB_API.Migrations
                         {
                             TableID = 1,
                             IsAvailable = true,
-                            TableNumber = 1,
                             TableSeats = 2
                         },
                         new
                         {
                             TableID = 2,
                             IsAvailable = true,
-                            TableNumber = 2,
                             TableSeats = 4
                         },
                         new
                         {
                             TableID = 3,
                             IsAvailable = true,
-                            TableNumber = 3,
                             TableSeats = 6
                         },
                         new
                         {
                             TableID = 4,
                             IsAvailable = true,
-                            TableNumber = 4,
                             TableSeats = 2
                         },
                         new
                         {
                             TableID = 5,
                             IsAvailable = true,
-                            TableNumber = 5,
                             TableSeats = 8
                         },
                         new
                         {
                             TableID = 6,
                             IsAvailable = true,
-                            TableNumber = 6,
                             TableSeats = 4
                         },
                         new
                         {
                             TableID = 7,
                             IsAvailable = true,
-                            TableNumber = 7,
                             TableSeats = 10
                         },
                         new
                         {
                             TableID = 8,
                             IsAvailable = true,
-                            TableNumber = 8,
                             TableSeats = 2
                         },
                         new
                         {
                             TableID = 9,
                             IsAvailable = true,
-                            TableNumber = 9,
                             TableSeats = 6
                         },
                         new
                         {
                             TableID = 10,
                             IsAvailable = true,
-                            TableNumber = 10,
                             TableSeats = 4
                         },
                         new
                         {
                             TableID = 11,
                             IsAvailable = true,
-                            TableNumber = 11,
                             TableSeats = 8
                         },
                         new
                         {
                             TableID = 12,
                             IsAvailable = true,
-                            TableNumber = 12,
                             TableSeats = 2
                         },
                         new
                         {
                             TableID = 13,
                             IsAvailable = true,
-                            TableNumber = 13,
                             TableSeats = 10
                         },
                         new
                         {
                             TableID = 14,
                             IsAvailable = true,
-                            TableNumber = 14,
                             TableSeats = 4
                         },
                         new
                         {
                             TableID = 15,
                             IsAvailable = true,
-                            TableNumber = 15,
                             TableSeats = 6
                         },
                         new
                         {
                             TableID = 16,
                             IsAvailable = true,
-                            TableNumber = 16,
                             TableSeats = 8
                         },
                         new
                         {
                             TableID = 17,
                             IsAvailable = true,
-                            TableNumber = 17,
                             TableSeats = 2
                         },
                         new
                         {
                             TableID = 18,
                             IsAvailable = true,
-                            TableNumber = 18,
                             TableSeats = 4
                         },
                         new
                         {
                             TableID = 19,
                             IsAvailable = true,
-                            TableNumber = 19,
                             TableSeats = 6
                         },
                         new
                         {
                             TableID = 20,
                             IsAvailable = true,
-                            TableNumber = 20,
                             TableSeats = 8
                         });
                 });

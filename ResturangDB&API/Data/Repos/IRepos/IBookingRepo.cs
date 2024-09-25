@@ -8,6 +8,6 @@ namespace ResturangDB_API.Data.Repos.IRepos
         Task<IEnumerable<Booking>> GetAllBookingsAsync();
         Task<Booking> GetBookingByIDAsync(int bookingID);
         Task UpdateBookingAsync(Booking booking);
-        Task DeleteBookingAsync(int bookingID);
+        Task DeleteBookingAsync(Booking booking);
     }
 }

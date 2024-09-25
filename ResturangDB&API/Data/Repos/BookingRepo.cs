@@ -30,7 +30,7 @@ namespace ResturangDB_API.Data.Repos
             {
                 throw new Exception("Try another table this one is booked!");
             }
-            else if (booking.BookingDay < DateTime.Now.Date || booking.BookingTime < DateTime.Now || booking.BookingTimeEnd <= booking.BookingTime)
+            else if (booking.Date < DateTime.Now.Date || booking.Time < DateTime.Now || booking.TimeEnd <= booking.Time)
             {
                 throw new Exception("Please input a valid booking time.");
             }
@@ -66,11 +66,7 @@ namespace ResturangDB_API.Data.Repos
             {
                 throw new Exception("Your company is to large for this table you need a table with more seats.");
             }
-            else if (!bookedTable.IsAvailable)
-            {
-                throw new Exception("Try another table this one is booked!");
-            }
-            else if (booking.BookingDay < DateTime.Now.Date || booking.BookingTime < DateTime.Now || booking.BookingTimeEnd <= booking.BookingTime)
+            else if (booking.Date < DateTime.Now.Date || booking.Time < DateTime.Now || booking.TimeEnd <= booking.Time)
             {
                 throw new Exception("Please input a valid booking time.");
             }
@@ -80,17 +76,18 @@ namespace ResturangDB_API.Data.Repos
                 _context.Bookings.Update(booking);
                 await _context.SaveChangesAsync();
             }
+
+            /*
+            else if (!bookedTable.IsAvailable)
+            {
+                throw new Exception("Try another table this one is booked!");
+            }
+            */
         }
 
-        public async Task DeleteBookingAsync(int bookingID)
+        public async Task DeleteBookingAsync(Booking booking)
         {
-            var booking = await _context.Bookings.FindAsync(bookingID);
-
-            if (booking != null)
-            {
-                _context.Bookings.Remove(booking);
-            }
-
+            _context.Bookings.Remove(booking);
             await _context.SaveChangesAsync();
         }
     }

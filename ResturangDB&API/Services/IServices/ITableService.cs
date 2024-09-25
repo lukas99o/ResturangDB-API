@@ -1,14 +1,14 @@
 ﻿using ResturangDB_API.Models;
-using ResturangDB_API.Models.DTOs;
+using ResturangDB_API.Models.DTOs.Table;
 
 namespace ResturangDB_API.Services.IServices
 {
     public interface ITableService
     {
-        Task AddTableAsync(TableDTO table);
-        Task<IEnumerable<TableDTO>> GetAllTablesAsync();
-        Task<TableDTO> GetTableByIdAsync(int tableID);
-        Task UpdateTableAsync(TableDTO table);
-        Task DeleteTableAsync(int tableID);
+        Task AddTableAsync(TableCreateDTO table);
+        Task<IEnumerable<TableGetDTO>> GetAllTablesAsync();
+        Task<TableGetDTO> GetTableByIdAsync(int tableID);
+        Task<bool> UpdateTableAsync(TableUpdateDTO table);
+        Task<bool> DeleteTableAsync(int tableID);
     }
 }

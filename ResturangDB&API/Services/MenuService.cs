@@ -1,94 +1,116 @@
 ﻿using ResturangDB_API.Data.Repos.IRepos;
-using ResturangDB_API.Models.DTOs;
 using ResturangDB_API.Models;
 using ResturangDB_API.Services.IServices;
 using System.Collections.Immutable;
+using Microsoft.EntityFrameworkCore.Update.Internal;
+using System.Net.WebSockets;
+using ResturangDB_API.Models.DTOs.Menu;
+using ResturangDB_API.Models.DTOs.MenuItem;
 
 namespace ResturangDB_API.Services
 {
     public class MenuService : IMenuService
     {
         private readonly IMenuRepo _menuRepo;
-        private readonly IMenuItemRepo _menuItemRepo;
 
-        public MenuService(IMenuRepo menuRepo, IMenuItemRepo menuItemRepo)
+        public MenuService(IMenuRepo menuRepo)
         {
             _menuRepo = menuRepo;
-            _menuItemRepo = menuItemRepo;
         }
 
-        public async Task AddMenuAsync(MenuDTO menu)
+        public async Task AddMenuAsync(MenuCreateDTO menuCreate)
         {
-            var newMenu = new Menu
+            var menu = new Menu
             {
-                MenuID = menu.MenuID,
-                Name = menu.Name
+                Name = menuCreate.Name
             };
 
-            await _menuRepo.AddMenuAsync(newMenu);
+            await _menuRepo.AddMenuAsync(menu);
         }
 
-        public async Task<IEnumerable<MenuDTO>> GetAllMenusAsync()
+        public async Task<IEnumerable<MenuGetDTO>> GetAllMenusAsync()
         {
-            var menuList = await _menuRepo.GetAllMenusAsync();
-            return menuList.Select(menu => new MenuDTO
+            var menus = await _menuRepo.GetAllMenusAsync();
+
+            var menuList = menus.Select(menu => new MenuGetDTO
             {
                 MenuID = menu.MenuID,
                 Name = menu.Name
             }).ToList();
+
+            return menuList;
         }
 
-        public async Task<MenuDTO> GetMenuByIdAsync(int menuID)
+        public async Task<MenuGetDTO> GetMenuByIdAsync(int menuID)
         {
-            var menu = await _menuRepo.GetMenuByIdAsync(menuID);
+            var menuFound = await _menuRepo.GetMenuByIdAsync(menuID);
 
-            if (menu == null)
+            if (menuFound != null)
             {
-                return null;
+                var menu = new MenuGetDTO
+                {
+                    MenuID = menuFound.MenuID,
+                    Name = menuFound.Name
+                };
+
+                return menu;
             }
 
-            return new MenuDTO
-            {
-                MenuID = menu.MenuID,
-                Name = menu.Name
-            };
+            return null;
         }
 
-        public async Task<IEnumerable<MenuItemDTO>> GetMenuItemsAsync(int menuID)
+        public async Task<IEnumerable<MenuItemGetDTO>> GetMenuItemsAsync(int menuID)
         {
-            var menu = await _menuRepo.GetMenuWithItemsAsync(menuID);
+            var menuFound = await _menuRepo.GetMenuWithItemsAsync(menuID);
             
-            if (menu == null || menu.MenuItems == null)
+            if (menuFound == null || menuFound.MenuItems == null)
             {
-                return new List<MenuItemDTO>();
+                return new List<MenuItemGetDTO>();
             }
 
-            var menuItemDtos = menu.MenuItems.Select(menuItem => new MenuItemDTO
+            var menuItemDtos = menuFound.MenuItems.Select(menuItem => new MenuItemGetDTO
             {
                 MenuItemID = menuItem.MenuItemID,
                 Name = menuItem.Name,
                 Price = menuItem.Price,
                 IsAvailable = menuItem.IsAvailable,
-                FK_MenuID = menuItem.FK_MenuID
+                MenuID = menuItem.FK_MenuID
             }).ToList();
 
             return menuItemDtos;
         }
 
-        public async Task UpdateMenuAsync(MenuDTO menu)
+        public async Task<bool> UpdateMenuAsync(MenuUpdateDTO menu)
         {
-            var updatedMenu = new Menu
+            if (string.IsNullOrEmpty(menu.Name))
             {
-                MenuID = menu.MenuID,
-                Name = menu.Name
-            };
+                return false;
+            }
 
-            await _menuRepo.UpdateMenuAsync(updatedMenu);
+            var updatedMenu = await _menuRepo.GetMenuByIdAsync(menu.MenuID);
+
+            if (updatedMenu != null)
+            {
+                updatedMenu.Name = menu.Name;
+                await _menuRepo.UpdateMenuAsync(updatedMenu);
+
+                return true;
+            }
+
+            return false;
         }
 
-        public async Task DeleteMenuAsync(int menuID)
+        public async Task<bool> DeleteMenuAsync(int menuID)
         {
-            await _menuRepo.DeleteMenuAsync(menuID);
+            var foundMenu = await _menuRepo.GetMenuByIdAsync(menuID);
+
+            if (foundMenu != null)
+            {
+                await _menuRepo.DeleteMenuAsync(foundMenu);
+                return true;
+            }
+
+            return false;
         }
     }
 }
