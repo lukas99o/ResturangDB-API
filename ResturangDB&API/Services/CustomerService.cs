@@ -86,6 +86,7 @@ namespace ResturangDB_API.Services
 
         public async Task<bool> DeleteCustomerAsync(int customerID)
         {
+            Console.WriteLine(customerID);
             var foundCustomer = await _customerRepo.GetCustomerByIDAsync(customerID);
 
             if (foundCustomer != null)

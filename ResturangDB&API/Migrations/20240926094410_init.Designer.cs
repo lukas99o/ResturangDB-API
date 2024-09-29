@@ -12,7 +12,7 @@ using ResturangDB_API.Data;
 namespace ResturangDB_API.Migrations
 {
     [DbContext(typeof(ResturangContext))]
-    [Migration("20240925104757_init")]
+    [Migration("20240926094410_init")]
     partial class init
     {
         /// <inheritdoc />
