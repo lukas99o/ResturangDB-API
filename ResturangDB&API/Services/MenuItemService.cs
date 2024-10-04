@@ -21,7 +21,9 @@ namespace ResturangDB_API.Services
                 Name = menuItemCreate.Name,
                 Price = menuItemCreate.Price,
                 IsAvailable = menuItemCreate.IsAvailable,
-                FK_MenuID = menuItemCreate.MenuID
+                FK_MenuID = menuItemCreate.MenuID,
+                ImgUrl = menuItemCreate.ImgUrl,
+                Description = menuItemCreate.Description
             };
 
             await _menuItemRepo.AddMenuItemAsync(menuItem);
@@ -37,7 +39,9 @@ namespace ResturangDB_API.Services
                 MenuID = menuItem.FK_MenuID,
                 Name = menuItem.Name,
                 Price = menuItem.Price,
-                IsAvailable = menuItem.IsAvailable
+                IsAvailable = menuItem.IsAvailable,
+                ImgUrl = menuItem.ImgUrl,
+                Description = menuItem.Description
             }).ToList();
 
             return menuItemList;
@@ -55,7 +59,9 @@ namespace ResturangDB_API.Services
                     MenuID = menuItemFound.FK_MenuID,
                     Name = menuItemFound.Name,
                     Price = menuItemFound.Price,
-                    IsAvailable = menuItemFound.IsAvailable
+                    IsAvailable = menuItemFound.IsAvailable,
+                    ImgUrl = menuItemFound.ImgUrl,
+                    Description = menuItemFound.Description
                 };
 
                 return menuItem;
@@ -75,8 +81,12 @@ namespace ResturangDB_API.Services
 
             if (foundMenuItem != null)
             {
+                foundMenuItem.FK_MenuID = menuItem.MenuID;
+                foundMenuItem.Name = menuItem.Name;
                 foundMenuItem.Price = menuItem.Price;
                 foundMenuItem.IsAvailable = menuItem.IsAvailable;
+                foundMenuItem.ImgUrl = menuItem.ImgUrl;
+                foundMenuItem.Description = menuItem.Description;
                 await _menuItemRepo.UpdateMenuItemAsync(foundMenuItem);
 
                 return true;

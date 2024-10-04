@@ -79,7 +79,9 @@ namespace ResturangDB_API.Services
 
             if (bookingFound != null)
             {
-                bookingFound.Date = booking.Date;
+                bookingFound.FK_CustomerID = booking.CustomerID;
+                bookingFound.FK_TableID = booking.TableID;
+                bookingFound.Date = booking.Date.Date;
                 bookingFound.Time = booking.Time;
                 bookingFound.TimeEnd = booking.TimeEnd;
                 bookingFound.AmountOfPeople = booking.AmountOfPeople;

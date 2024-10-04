@@ -191,8 +191,15 @@ namespace ResturangDB_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MenuItemID"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("FK_MenuID")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
@@ -214,7 +221,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 1,
+                            Description = "Classic Italian pasta with a rich, meaty tomato sauce.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://www.recipetineats.com/tachyon/2018/07/Spaghetti-Bolognese.jpg",
                             IsAvailable = true,
                             Name = "Bolognese",
                             Price = 130
@@ -222,7 +231,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 2,
+                            Description = "Fresh pizza topped with mozzarella, basil, and tomato sauce.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://eu-central-1.linodeobjects.com/tasteline/2018/06/pizza-margherita-foto-kerstin-eriksson-original-2048x2048.jpg",
                             IsAvailable = true,
                             Name = "Margherita Pizza",
                             Price = 120
@@ -230,7 +241,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 3,
+                            Description = "Crisp romaine lettuce with Caesar dressing, croutons, and Parmesan.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://cdn.kronfagel.se/app/uploads/2019/07/Caesarsallad.jpg",
                             IsAvailable = true,
                             Name = "Caesar Salad",
                             Price = 95
@@ -238,7 +251,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 4,
+                            Description = "Juicy grilled chicken marinated in flavorful herbs and spices.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://www.cookinwithmima.com/wp-content/uploads/2021/06/Grilled-BBQ-Chicken.jpg",
                             IsAvailable = true,
                             Name = "Grilled Chicken",
                             Price = 150
@@ -246,7 +261,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 5,
+                            Description = "Soft tacos filled with crispy fried fish and zesty slaw.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://www.allrecipes.com/thmb/_emMPu4gpcuCOoC0kfjRWIdHlmc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/53729-fish-tacos-DDMFS-4x3-b5547c67c6f0432da06ad8f905e82c1e.jpg",
                             IsAvailable = true,
                             Name = "Fish Tacos",
                             Price = 110
@@ -254,7 +271,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 6,
+                            Description = "Tender pork ribs glazed with smoky BBQ sauce, grilled to perfection.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://www.barossafinefoods.com.au/glide-cache/containers/main/2020_bff_porkribs_bbq_website-2.jpg/03d880f2ca84b83fdeb147548e7d9b12.jpg",
                             IsAvailable = true,
                             Name = "BBQ Ribs",
                             Price = 200
@@ -262,7 +281,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 7,
+                            Description = "Creamy beef stroganoff served with sautéed mushrooms and pasta.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://www.recipetineats.com/tachyon/2018/01/Beef-Stroganoff_2-1-1.jpg",
                             IsAvailable = true,
                             Name = "Beef Stroganoff",
                             Price = 160
@@ -270,7 +291,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 8,
+                            Description = "Fresh veggies stir-fried in a light soy sauce with ginger and garlic.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://natashaskitchen.com/wp-content/uploads/2020/08/Vegetable-Stir-Fry-2.jpg",
                             IsAvailable = true,
                             Name = "Vegetable Stir-Fry",
                             Price = 100
@@ -278,7 +301,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 9,
+                            Description = "Classic Italian pasta with creamy egg sauce, pancetta, and Parmesan.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://static01.nyt.com/images/2021/02/14/dining/carbonara-horizontal/carbonara-horizontal-square640-v2.jpg",
                             IsAvailable = true,
                             Name = "Spaghetti Carbonara",
                             Price = 135
@@ -286,7 +311,9 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 10,
+                            Description = "Layers of pasta, meat sauce, and cheese baked to golden perfection.",
                             FK_MenuID = 1,
+                            ImgUrl = "https://thecozycook.com/wp-content/uploads/2022/04/Lasagna-Recipe-f.jpg",
                             IsAvailable = true,
                             Name = "Lasagna",
                             Price = 140
@@ -294,6 +321,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 11,
+                            Description = "Rich and creamy Alfredo sauce tossed with tender grilled chicken and pasta.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Chicken Alfredo",
@@ -302,6 +330,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 12,
+                            Description = "Crispy bread slices toasted with garlic butter and fresh herbs.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Garlic Bread",
@@ -310,6 +339,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 13,
+                            Description = "Golden and crispy fries seasoned to perfection.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "French Fries",
@@ -318,6 +348,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 14,
+                            Description = "Juicy beef patty topped with melted cheese, lettuce, and tomato.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Cheeseburger",
@@ -326,6 +357,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 15,
+                            Description = "Fresh veggies, feta cheese, and olives tossed in a light vinaigrette.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Greek Salad",
@@ -334,6 +366,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 16,
+                            Description = "Creamy Arborio rice cooked with sautéed mushrooms and Parmesan.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Mushroom Risotto",
@@ -342,6 +375,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 17,
+                            Description = "Classic tuna salad sandwich served on toasted bread.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Tuna Sandwich",
@@ -350,6 +384,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 18,
+                            Description = "Fluffy pancakes served with syrup and butter.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Pancakes",
@@ -358,6 +393,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 19,
+                            Description = "Decadent chocolate cake topped with rich frosting.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Chocolate Cake",
@@ -366,6 +402,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 20,
+                            Description = "Creamy ice cream topped with chocolate sauce, nuts, and a cherry.",
                             FK_MenuID = 1,
                             IsAvailable = true,
                             Name = "Ice Cream Sundae",
@@ -374,6 +411,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 21,
+                            Description = "Refreshing carbonated soft drink.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Coca-Cola",
@@ -382,6 +420,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 22,
+                            Description = "Crisp lemon-lime flavored soda.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Sprite",
@@ -390,6 +429,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 23,
+                            Description = "Fruity and sweet orange soda.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Fanta",
@@ -398,6 +438,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 24,
+                            Description = "Classic cola with a bold, refreshing taste.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Pepsi",
@@ -406,6 +447,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 25,
+                            Description = "Chilled tea served with lemon for a refreshing taste.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Iced Tea",
@@ -414,6 +456,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 26,
+                            Description = "Freshly squeezed lemonade with a tangy, sweet flavor.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Lemonade",
@@ -422,6 +465,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 27,
+                            Description = "Freshly squeezed orange juice, packed with vitamin C.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Orange Juice",
@@ -430,6 +474,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 28,
+                            Description = "Crisp and sweet apple juice.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Apple Juice",
@@ -438,6 +483,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 29,
+                            Description = "Refreshing and clean mineral water.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Mineral Water",
@@ -446,6 +492,7 @@ namespace ResturangDB_API.Migrations
                         new
                         {
                             MenuItemID = 30,
+                            Description = "Bubbly, refreshing sparkling water.",
                             FK_MenuID = 2,
                             IsAvailable = true,
                             Name = "Sparkling Water",

@@ -74,7 +74,8 @@ namespace ResturangDB_API.Services
                 Name = menuItem.Name,
                 Price = menuItem.Price,
                 IsAvailable = menuItem.IsAvailable,
-                MenuID = menuItem.FK_MenuID
+                MenuID = menuItem.FK_MenuID,
+                ImgUrl = menuItem.ImgUrl
             }).ToList();
 
             return menuItemDtos;

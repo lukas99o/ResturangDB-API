@@ -23,5 +23,8 @@ namespace ResturangDB_API.Models
 
         [JsonIgnore]
         public Menu Menu { get; set; }
+
+        public string ?ImgUrl { get; set; }
+        public string Description { get; set; }
     }
 }
