@@ -2,16 +2,19 @@
 using ResturangDB_API.Models;
 using ResturangDB_API.Models.DTOs.Table;
 using ResturangDB_API.Services.IServices;
+using System.Net.WebSockets;
 
 namespace ResturangDB_API.Services
 {
     public class TableService : ITableService
     {
         private readonly ITableRepo _tableRepo;
+        private readonly IBookingRepo _bookingRepo;
 
-        public TableService(ITableRepo tableRepo)
+        public TableService(ITableRepo tableRepo, IBookingRepo bookingRepo)
         {
             _tableRepo = tableRepo;
+            _bookingRepo = bookingRepo;
         }
 
         public async Task AddTableAsync(TableCreateDTO tableCreate)
@@ -85,6 +88,50 @@ namespace ResturangDB_API.Services
             }
 
             return false;
+        }
+
+        public async Task<IEnumerable<TableGetDTO>> GetAvailableTablesAsync(DateTime time, DateTime timeEnd)
+        {
+            var tables = await _tableRepo.GetAllTablesAsync();
+            var bookings = await _bookingRepo.GetAllBookingsAsync();
+
+            foreach (var booking in bookings)
+            {
+                if (time <= booking.Time && timeEnd <= booking.TimeEnd)
+                {
+                    booking.Table.IsAvailable = false;
+                }
+
+                if (time >= booking.Time && timeEnd <= booking.TimeEnd)
+                {
+                    booking.Table.IsAvailable = false;
+                }
+
+                if (time >= booking.Time && time <= booking.TimeEnd && timeEnd >= booking.TimeEnd)
+                {
+                    booking.Table.IsAvailable = false;
+                }
+
+                if (time <= booking.Time && timeEnd >= booking.TimeEnd)
+                {
+                    booking.Table.IsAvailable = false;
+                }
+            }
+
+            tables = tables.Where(t => t.IsAvailable);
+
+            var tableList = tables.Select(table => new TableGetDTO
+            {
+                TableID = table.TableID,
+                TableSeats = table.TableSeats,
+                IsAvailable = table.IsAvailable
+            }).ToList();
+
+            return tableList;
+
+            // booked tables is equal too the booking time and timeEnd if a tableID is within the time window
+            // it shall be temporarly unavailable so that the Get endpoint can return a list with tables that are
+            // available within i certain time.
         }
     }
 }

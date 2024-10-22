@@ -8,6 +8,7 @@ namespace ResturangDB_API.Services.IServices
         Task AddTableAsync(TableCreateDTO table);
         Task<IEnumerable<TableGetDTO>> GetAllTablesAsync();
         Task<TableGetDTO> GetTableByIdAsync(int tableID);
+        Task<IEnumerable<TableGetDTO>> GetAvailableTablesAsync(DateTime time, DateTime timeEnd);
         Task<bool> UpdateTableAsync(TableUpdateDTO table);
         Task<bool> DeleteTableAsync(int tableID);
     }

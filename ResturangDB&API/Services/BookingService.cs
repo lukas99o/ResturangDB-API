@@ -24,7 +24,6 @@ namespace ResturangDB_API.Services
                 FK_CustomerID = booking.CustomerID,
                 FK_TableID = booking.TableID,
                 AmountOfPeople = booking.AmountOfPeople,
-                Date = booking.Date.Date,
                 Time = booking.Time,
                 TimeEnd = booking.TimeEnd
             };
@@ -42,7 +41,6 @@ namespace ResturangDB_API.Services
                 CustomerID = booking.FK_CustomerID,
                 TableID = booking.FK_TableID,
                 AmountOfPeople = booking.AmountOfPeople,
-                Date = booking.Date,
                 Time = booking.Time,
                 TimeEnd = booking.TimeEnd
             }).ToList();
@@ -62,7 +60,6 @@ namespace ResturangDB_API.Services
                     CustomerID = bookingFound.FK_CustomerID,
                     TableID = bookingFound.FK_TableID,
                     AmountOfPeople = bookingFound.AmountOfPeople,
-                    Date = bookingFound.Date,
                     Time = bookingFound.Time,
                     TimeEnd = bookingFound.TimeEnd
                 };
@@ -81,7 +78,6 @@ namespace ResturangDB_API.Services
             {
                 bookingFound.FK_CustomerID = booking.CustomerID;
                 bookingFound.FK_TableID = booking.TableID;
-                bookingFound.Date = booking.Date.Date;
                 bookingFound.Time = booking.Time;
                 bookingFound.TimeEnd = booking.TimeEnd;
                 bookingFound.AmountOfPeople = booking.AmountOfPeople;

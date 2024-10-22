@@ -30,13 +30,12 @@ namespace ResturangDB_API.Data.Repos
             {
                 throw new Exception("Try another table this one is booked!");
             }
-            else if (booking.Date < DateTime.Now.Date || booking.Time < DateTime.Now || booking.TimeEnd <= booking.Time)
+            else if (booking.Time < DateTime.Now || booking.TimeEnd <= booking.Time || booking.TimeEnd <= DateTime.Now.AddMinutes(30))
             {
                 throw new Exception("Please input a valid booking time.");
             }
             else
             {
-                tableToBeBooked.IsAvailable = false;
                 await _context.Bookings.AddAsync(booking);
                 await _context.SaveChangesAsync();
             }
@@ -66,23 +65,15 @@ namespace ResturangDB_API.Data.Repos
             {
                 throw new Exception("Your company is to large for this table you need a table with more seats.");
             }
-            else if (booking.Date < DateTime.Now.Date || booking.Time < DateTime.Now || booking.TimeEnd <= booking.Time)
+            else if (booking.Time < DateTime.Now || booking.TimeEnd <= booking.Time || booking.TimeEnd <= DateTime.Now.AddMinutes(30))
             {
                 throw new Exception("Please input a valid booking time.");
             }
             else
             {
-                bookedTable.IsAvailable = false;
                 _context.Bookings.Update(booking);
                 await _context.SaveChangesAsync();
             }
-
-            /*
-            else if (!bookedTable.IsAvailable)
-            {
-                throw new Exception("Try another table this one is booked!");
-            }
-            */
         }
 
         public async Task DeleteBookingAsync(Booking booking)

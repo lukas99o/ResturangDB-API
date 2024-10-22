@@ -2,6 +2,7 @@
 using ResturangDB_API.Models;
 using ResturangDB_API.Services.IServices;
 using ResturangDB_API.Models.DTOs.Table;
+using ResturangDB_API.Data.Repos.IRepos;
 
 namespace ResturangDB_API.Controllers
 {
@@ -50,6 +51,14 @@ namespace ResturangDB_API.Controllers
             return Ok(table);
         }
 
+        [HttpGet]
+        [Route("AvailableTables")]
+        public async Task<ActionResult<IEnumerable<TableGetDTO>>> AvailableTables(DateTime time, DateTime timeEnd)
+        {
+            var tableList = await _tableService.GetAvailableTablesAsync(time, timeEnd);
+            return Ok(tableList);
+        }
+
         [HttpPut]
         [Route("UpdateTable/{tableID}")]
         public async Task<IActionResult> UpdateSpecificTable(int tableID, TableUpdateDTO table)
@@ -82,6 +91,5 @@ namespace ResturangDB_API.Controllers
 
             return NoContent();
         }
-
     }
 }

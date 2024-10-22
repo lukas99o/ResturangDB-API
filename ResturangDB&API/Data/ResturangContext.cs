@@ -63,7 +63,7 @@ namespace ResturangDB_API.Data
                 );
 
             modelBuilder.Entity<MenuItem>().HasData
-            (
+                (
                 // Main Menu
                 new MenuItem { MenuItemID = 1, Name = "Bolognese", Price = 130, IsAvailable = true, FK_MenuID = 1, ImgUrl = "https://www.recipetineats.com/tachyon/2018/07/Spaghetti-Bolognese.jpg", Description = "Classic Italian pasta with a rich, meaty tomato sauce." },
                 new MenuItem { MenuItemID = 2, Name = "Margherita Pizza", Price = 120, IsAvailable = true, FK_MenuID = 1, ImgUrl = "https://eu-central-1.linodeobjects.com/tasteline/2018/06/pizza-margherita-foto-kerstin-eriksson-original-2048x2048.jpg", Description = "Fresh pizza topped with mozzarella, basil, and tomato sauce." },
@@ -97,7 +97,7 @@ namespace ResturangDB_API.Data
                 new MenuItem { MenuItemID = 28, Name = "Apple Juice", Price = 35, IsAvailable = true, FK_MenuID = 2, Description = "Crisp and sweet apple juice." },
                 new MenuItem { MenuItemID = 29, Name = "Mineral Water", Price = 20, IsAvailable = true, FK_MenuID = 2, Description = "Refreshing and clean mineral water." },
                 new MenuItem { MenuItemID = 30, Name = "Sparkling Water", Price = 25, IsAvailable = true, FK_MenuID = 2, Description = "Bubbly, refreshing sparkling water." }
-            );
+                );
         }
     }
 }

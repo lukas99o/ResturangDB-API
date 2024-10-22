@@ -4,6 +4,7 @@ using ResturangDB_API.Data.Repos;
 using ResturangDB_API.Data.Repos.IRepos;
 using ResturangDB_API.Services;
 using ResturangDB_API.Services.IServices;
+using System.Security.Cryptography.Xml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,16 +24,18 @@ builder.Services.AddScoped<IMenuItemRepo, MenuItemRepo>();
 builder.Services.AddScoped<IMenuItemService, MenuItemService>();
 builder.Services.AddScoped<IBookingRepo, BookingRepo>();
 builder.Services.AddScoped<IBookingService, BookingService>();
-builder.Services.AddScoped<StartupRepo>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var startupRepo = scope.ServiceProvider.GetRequiredService<StartupRepo>();
-
-    await startupRepo.UpdateTableAvailabilityAsync();
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,6 +43,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();
 
