@@ -29,7 +29,9 @@ namespace ResturangDB_API.Data
                     new Customer { CustomerID = 7, Name = "Ethan", Email = "ethan@yahoo.com", PhoneNumber = "7890123456" },
                     new Customer { CustomerID = 8, Name = "Sophia", Email = "sophia@outlook.com", PhoneNumber = "8901234567" },
                     new Customer { CustomerID = 9, Name = "James", Email = "james@hotmail.com", PhoneNumber = "9012345678" },
-                    new Customer { CustomerID = 10, Name = "Mia", Email = "mia@gmail.com", PhoneNumber = "0123456789" }
+                    new Customer { CustomerID = 10, Name = "Mia", Email = "mia@gmail.com", PhoneNumber = "0123456789" },
+
+                    new Customer { CustomerID = 11,  Email = "admin@email.com", Password = "admin"}
                 );
 
             modelBuilder.Entity<Table>().HasData

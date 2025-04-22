@@ -36,7 +36,8 @@ namespace ResturangDB_API.Services
                 CustomerID = customer.CustomerID,
                 Name = customer.Name,
                 Email = customer.Email,
-                PhoneNumber = customer.PhoneNumber
+                PhoneNumber = customer.PhoneNumber,
+                Password = customer.Password
             }).ToList();
 
             return customerList;
